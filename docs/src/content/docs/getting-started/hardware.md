@@ -122,7 +122,7 @@ GeekMagic's own higher-end model. Same cube and panel, but a classic ESP32 with 
 
 Unlike the ESP32-C2 board there is **no USB-serial chip**: the USB-C port is power only. The first install goes over the air from the stock web UI, and serial access means opening the case and wiring a 3.3 V USB-UART adapter to the internal header (see [Flashing](/smalltv-mod/getting-started/flashing/#smalltv-pro-classic-esp32-8-mb)).
 
-The pin map comes from the ESPHome SmallTV Pro community config and matches what the stock firmware uses. Support for this board is new; it has not yet been confirmed on hardware by a tester, so if anything looks wrong please open an issue.
+The pin map comes from the ESPHome SmallTV Pro community config and matches what the stock firmware uses. Confirmed working on a real device: display, colours, backlight PWM, and the 8 MB flash layout.
 
 ### Pin map
 
