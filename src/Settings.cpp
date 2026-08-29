@@ -416,6 +416,48 @@ void RadarSettings::fromJson(JsonObjectConst o) {
 }
 
 // ===========================================================================
+// Weather slice
+// ===========================================================================
+void WeatherSettings::setDefaults() {
+  lat = DEFAULT_WEATHER_LAT;
+  lon = DEFAULT_WEATHER_LON;
+  station = DEFAULT_WEATHER_STATION;
+  source = WEATHER_SRC_WEATHER_GOV;
+  units = WEATHER_UNITS_IMPERIAL;
+  webhookUrl = "";
+  pollSec = DEFAULT_WEATHER_POLL_SEC;
+}
+
+void WeatherSettings::toJson(JsonObject o) const {
+  o["lat"]        = lat;
+  o["lon"]        = lon;
+  o["station"]    = station;
+  o["source"]     = (source == RADAR_SRC_WEBHOOK) ? "webhook"
+                  : "weather.gov";
+  o["webhookUrl"] = webhookUrl;
+  o["units"]      = (units == WEATHER_UNITS_IMPERIAL) ? "imperial" : "metric";
+  o["pollSec"]    = pollSec;
+}
+
+void WeatherSettings::fromJson(JsonObjectConst o) {
+  if (o["lat"].is<float>() || o["lat"].is<int>()) lat = o["lat"].as<float>();
+  if (o["lon"].is<float>() || o["lon"].is<int>()) lon = o["lon"].as<float>();
+  if (o["source"].is<const char*>()) {
+    String src = o["source"].as<String>();
+    if (src.equalsIgnoreCase("webhook")) source = WEATHER_SRC_WEBHOOK;
+    else                                 source = WEATHER_SRC_WEATHER_GOV;
+  }
+  if (o["station"].is<const char*>()) station = o["station"].as<String>();
+  if (o["webhookUrl"].is<const char*>()) webhookUrl = o["webhookUrl"].as<String>();
+  if (o["pollSec"].is<int>())    pollSec = constrain((int)o["pollSec"], 3, 3600);
+  if (o["units"].is<const char*>()) {
+    String u = o["units"].as<String>();
+    if (u.equalsIgnoreCase("metric")) units = WEATHER_UNITS_METRIC;
+    else                              units = WEATHER_UNITS_IMPERIAL;
+  }
+}
+
+// ===========================================================================
 // Top-level settings
 // ===========================================================================
 void Settings::setDefaults() {

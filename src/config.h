@@ -300,9 +300,19 @@
 
 #define DEFAULT_WEATHER_STATION ""
 
+#define DEFAULT_WEATHER_LAT       0.0f
+#define DEFAULT_WEATHER_LON       0.0f
 #define WEATHER_HOST "api.weather.gov"
-#define WEATHER_PATH "/stations/"
+#define WEATHER_POINTS_PATH "/points/"
+#define WEATHER_CURRENT_PATH "/stations/"
 #define WEATHER_USER_AGENT "SmallTV <smalltv@fortian.com>"
+#define DEFAULT_WEATHER_POLL_SEC (20 * 60) // api.weather.gov doesn't update very often
+
+#define WEATHER_UNITS_IMPERIAL 0
+#define WEATHER_UNITS_METRIC   1
+
+#define WEATHER_SRC_WEATHER_GOV 0
+#define WEATHER_SRC_WEBHOOK     1
 
 // ---------------------------------------------------------------------------
 // Defaults (used on first boot / factory reset)

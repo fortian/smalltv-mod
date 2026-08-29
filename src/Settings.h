@@ -177,6 +177,22 @@ struct RadarSettings {
   void fromJson(JsonObjectConst o);
 };
 
+// ---- Weather feature slice -------------------------------------------------
+struct WeatherSettings {
+  float    lat;           // home latitude  (0,0 = not set yet)
+  float    lon;           // home longitude
+  String   station;
+  uint8_t  source;        // WEATHER_SRC_WEATHERGOV or WEATHER_SRC_WEBHOOK
+  uint8_t  units;         // WEATHER_UNITS_IMPERIAL or WEATHER_UNITS_METRIC
+  String   webhookUrl;    // LAN proxy base URL (when source=webhook)
+  uint16_t pollSec;       // refresh period
+
+  void setDefaults();
+  void toJson(JsonObject o) const;
+  void fromJson(JsonObjectConst o);
+};
+
+
 // ---- Top-level settings ----------------------------------------------------
 struct Settings {
   // --- WiFi station networks (the device joins one of these) ---
@@ -211,6 +227,7 @@ struct Settings {
   DisplaySettings display;   // panel colour correction
   WgSettings      wg;        // WireGuard tunnel (ESP32 targets)
   AuthSettings    auth;      // optional web UI password
+  WeatherSettings weather;
 
   void setDefaults();
 };
