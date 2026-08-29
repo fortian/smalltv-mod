@@ -118,6 +118,7 @@
 //   1 = Claude usage meter (mascot + 5h/7d usage bars, fed by the daemon/)
 //   2 = plane radar
 //   3 = carousel: rotate through the ticked features on a timer
+//   6 = weather
 // ---------------------------------------------------------------------------
 #define MODE_STOCKS    0
 #define MODE_USAGE     1
@@ -125,6 +126,7 @@
 #define MODE_CAROUSEL  3
 #define MODE_NOTIFY    4             // transient overlay: armed over HTTP, never persisted
 #define MODE_HA        5             // Home Assistant screens pushed over MQTT
+#define MODE_WEATHER   6
 #define DEFAULT_MODE MODE_STOCKS
 #define DEFAULT_CAROUSEL_SEC 30      // per-mode dwell in carousel
 
@@ -189,6 +191,9 @@
 #endif
 #ifndef WITH_HA
 #define WITH_HA 1
+#endif
+#ifndef WITH_WEATHER
+#define WITH_WEATHER 1
 #endif
 
 // Claude usage mode: once data stops arriving for this long (PC asleep, daemon
@@ -292,6 +297,12 @@
 #define DEFAULT_RADAR_LON       0.0f
 #define DEFAULT_RADAR_RANGE_KM  20
 #define DEFAULT_RADAR_POLL_SEC  10     // >=3 keeps us under the 1 req/s limit
+
+#define DEFAULT_WEATHER_STATION ""
+
+#define WEATHER_HOST "api.weather.gov"
+#define WEATHER_PATH "/stations/"
+#define WEATHER_USER_AGENT "SmallTV <smalltv@fortian.com>"
 
 // ---------------------------------------------------------------------------
 // Defaults (used on first boot / factory reset)

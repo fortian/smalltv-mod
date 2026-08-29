@@ -36,6 +36,9 @@
 #include "HaMode.h"
 #include "MqttClient.h"
 #endif
+#if WITH_WEATHER
+#include "WeatherMode.h"
+#endif
 
 // ---- mode registry --------------------------------------------------------
 // The compiled-in features, in display order. main.cpp holds no per-feature
@@ -52,6 +55,9 @@ static DisplayMode* kModes[] = {
 #endif
 #if WITH_HA
   &g_haMode,
+#endif
+#if WITH_WEATHER
+  &g_weatherMode,
 #endif
 };
 static const size_t kModeCount = sizeof(kModes) / sizeof(kModes[0]);
